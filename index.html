@@ -73,20 +73,30 @@
 </script>
     <hr class="section-divider">
 
-    <section id="blogs" class="container">
-        <h2 class="section-title">Latest Updates</h2>
-        <div class="blog-list">
-            <article class="blog-item">
-                <div class="blog-date">March 20, 2026</div>
-                <h3><a href="#">Behind the Scenes: Zero Light Year (ศูนย์ปีแสง)</a></h3>
-            </article>
-            <article class="blog-item">
-                <div class="blog-date">March 10, 2026</div>
-                <h3><a href="#">The Art of Visual Storytelling in Modern Cinema</a></h3>
-            </article>
+<section id="blogs" class="container">
+    <h2 class="section-title">Latest Updates</h2>
+    <div id="blog-list" class="blog-list">
         </div>
-    </section>
+</section>
 
+<script>
+    fetch('blogs.json') // สร้างไฟล์แยกสำหรับบล็อก
+        .then(response => response.json())
+        .then(data => {
+            const blogContainer = document.getElementById('blog-list');
+            let blogHtml = '';
+            data.forEach(post => {
+                blogHtml += `
+                <article class="blog-item">
+                    <div class="blog-date">${post.date}</div>
+                    <h3><a href="${post.url}">${post.title}</a></h3>
+                </article>
+                `;
+            });
+            blogContainer.innerHTML = blogHtml;
+        });
+</script>
+    
     <footer>
         <div class="container">
             <div id="newsletter" class="newsletter-box">
