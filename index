@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alsonut | Brainfood & Storytelling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <div class="logo">ALSONUT</div>
+            <ul class="nav-links">
+                <li><a href="#brainfood">Brainfood</a></li>
+                <li><a href="#blogs">Blogs</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#newsletter" class="btn-yellow">Join Newsletter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>ต่อยอดความคิด ผ่านมิติภาพยนตร์</h1>
+            <p>คลังแสงความรู้สำหรับคนรักหนังและนักเล่าเรื่อง</p>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="container">
+            <div class="tags">
+                <button class="tag active">All</button>
+                <button class="tag">Ref.</button>
+                <button class="tag">Cool Site</button>
+                <button class="tag">Portfolio</button>
+                <button class="tag">Design</button>
+                <button class="tag">AI Tools</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="brainfood" class="content-grid container">
+        <div class="card">
+            <div class="thumbnail" style="background-image: url('https://via.placeholder.com/400x250');"></div>
+            <div class="card-body">
+                <span class="category">AI Tools</span>
+                <h3>ชื่อเครื่องมือหรือเว็บไซต์</h3>
+                <p>คำอธิบายสั้นๆ เกี่ยวกับสิ่งนี้ว่าช่วยในการทำหนังหรือเล่าเรื่องอย่างไรบ้าง...</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="thumbnail" style="background-image: url('https://via.placeholder.com/400x250');"></div>
+            <div class="card-body">
+                <span class="category">Design</span>
+                <h3>Storyboarding App</h3>
+                <p>ช่วยให้นักทำหนังวางโครงสร้างภาพได้ง่ายขึ้นใน 5 นาที</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="blogs" class="container">
+        <h2 class="section-title">Latest Blogs</h2>
+        <div class="blog-list">
+            <article class="blog-item">
+                <div class="blog-date">20 Mar 2026</div>
+                <h3><a href="#">เบื้องหลังการสร้างหนัง "ศูนย์ปีแสง" (Zero Light Year)</a></h3>
+            </article>
+            <article class="blog-item">
+                <div class="blog-date">15 Mar 2026</div>
+                <h3><a href="#">ถอดบทเรียนจาก Akira Kurosawa สู่งานโฆษณ
