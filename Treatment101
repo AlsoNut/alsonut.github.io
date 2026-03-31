@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Write a Treatment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #141210;
+  --paper:  #F6F2EC;
+  --warm:   #EDE5D8;
+  --rule:   #DDD3C4;
+  --gold:   #A8782A;
+  --rust:   #8B3520;
+  --sage:   #385F48;
+  --grey:   #7A7168;
+  --soft:   #FAF8F4;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+/* PROGRESS */
+#bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--gold); z-index: 9999;
+  transition: width .1s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 54px; z-index: 100;
+  background: rgba(246,242,236,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 14px;
+  color: var(--grey); letter-spacing: .02em;
+}
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--grey); text-decoration: none;
+  padding: 5px 10px; transition: color .15s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* COVER */
+.cover {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 110px 48px 80px;
+  position: relative; overflow: hidden;
+}
+.cover-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 65% 55% at 18% 82%, rgba(168,120,42,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 65% at 82% 18%, rgba(139,53,32,.06) 0%, transparent 65%);
+}
+.eyebrow {
+  font-size: 10px; letter-spacing: .35em;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 600; margin-bottom: 24px;
+}
+.cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 9vw, 108px);
+  font-weight: 900; line-height: .9;
+  letter-spacing: -.025em;
+  margin-bottom: 8px;
+}
+.cover h1 em {
+  display: block; font-style: italic;
+  font-weight: 400; font-size: .46em;
+  color: var(--rust); margin-top: 14px;
+  letter-spacing: .01em;
+}
+.cover-rule {
+  width: 40px; height: 1px;
+  background: var(--gold);
+  margin: 28px auto;
+}
+.cover-sub {
+  font-size: 16px; color: var(--grey);
+  font-weight: 300; max-width: 400px;
+  line-height: 1.7; margin-bottom: 36px;
+}
+.cover-chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.chip {
+  font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 5px 14px; color: var(--grey);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+.scroll-cue {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--grey);
+  animation: bob 2.5s ease-in-out infinite;
+}
+.scroll-cue::after {
+  content: ''; width: 1px; height: 32px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+@keyframes bob {
+  0%,100% { opacity:.35; transform: translateX(-50%) translateY(0); }
+  50%      { opacity:.9;  transform: translateX(-50%) translateY(5px); }
+}
+.cover > * { animation: rise .75s ease both; }
+.cover > *:nth-child(2) { animation-delay:.1s; }
+.cover > *:nth-child(3) { animation-delay:.25s; }
+.cover > *:nth-child(4) { animation-delay:.38s; }
+.cover > *:nth-child(5) { animation-delay:.5s; }
+.cover > *:nth-child(6) { animation-delay:.6s; }
+.cover > *:nth-child(7) { animation-delay:.68s; }
+@keyframes rise {
+  from { opacity:0; transform: translateY(18px); }
+  to   { opacity:1; transform: none; }
+}
+
+/* CHAPTER BREAK */
+.chbreak {
+  max-width: 760px; margin: 80px auto 0;
+  padding: 60px 52px 0;
+  border-top: 1px solid var(--rule);
+}
+.chbreak-inner { display: flex; align-items: flex-end; gap: 0; }
+.chnum {
+  font-family: 'Playfair Display', serif;
+  font-size: 108px; font-weight: 900;
+  color: var(--rule); line-height: 1;
+  margin-right: -8px; user-select: none;
+}
+.chinfo { padding-bottom: 6px; }
+.chlabel {
+  display: block; font-size: 9px;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600;
+  margin-bottom: 3px;
+}
+.chtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-style: italic; line-height: 1.1;
+}
+
+/* ARTICLE */
+article {
+  max-width: 680px; margin: 0 auto;
+  padding: 52px 52px 0;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+article.in { opacity: 1; transform: none; }
+
+.lead {
+  font-size: 18px; line-height: 1.75;
+  margin-bottom: 28px; font-weight: 400;
+  color: var(--ink);
+}
+p { color: #3A3630; margin-bottom: 16px; font-size: 15.5px; }
+strong { color: var(--ink); font-weight: 600; }
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; margin: 40px 0 14px;
+  font-weight: 700; color: var(--ink);
+}
+
+/* QUOTE */
+blockquote {
+  border-left: 2px solid var(--gold);
+  padding: 18px 26px; margin: 32px 0;
+  background: var(--soft);
+}
+blockquote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-style: italic;
+  line-height: 1.55; color: var(--ink);
+  margin-bottom: 8px;
+}
+blockquote cite {
+  font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--grey);
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+/* CALLOUT */
+.callout {
+  border: 1px solid var(--rule);
+  padding: 24px 28px; margin: 28px 0;
+  background: var(--warm); position: relative;
+}
+.callout[data-label]::before {
+  content: attr(data-label);
+  position: absolute; top: -10px; left: 18px;
+  background: var(--warm); padding: 0 8px;
+  font-size: 9px; letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--rust); font-weight: 700;
+}
+.callout p { margin-bottom: 8px; }
+.callout p:last-child { margin: 0; }
+
+.callout-dark {
+  background: var(--ink); padding: 28px 32px; margin: 28px 0;
+}
+.callout-dark p { color: #B8B0A4; margin-bottom: 8px; }
+.callout-dark p:last-child { margin: 0; }
+.callout-dark strong { color: var(--gold); }
+
+/* STEPPED LIST */
+.steps { margin: 24px 0; }
+.step {
+  display: flex; gap: 18px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.step:last-child { border: none; }
+.stepn {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 12px;
+  color: var(--gold); min-width: 28px;
+  padding-top: 2px;
+}
+.stepb h5 {
+  font-size: 14.5px; font-weight: 600;
+  color: var(--ink); margin-bottom: 3px;
+}
+.stepb p { font-size: 14px; color: var(--grey); margin: 0; line-height: 1.6; }
+
+/* PLAIN LIST */
+.plist { list-style: none; margin: 20px 0; border-top: 1px solid var(--rule); }
+.plist li {
+  padding: 14px 0 14px 26px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px; color: #3A3630;
+  position: relative;
+}
+.plist li::before {
+  content: attr(data-n);
+  position: absolute; left: 0; top: 16px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 12px;
+  color: var(--gold);
+}
+.plist li strong { display: block; margin-bottom: 2px; }
+.plist li span { font-size: 13.5px; color: var(--grey); }
+
+/* TWO COL */
+.cols {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); margin: 24px 0;
+}
+.col {
+  background: var(--soft);
+  padding: 22px 24px;
+}
+.col .col-head {
+  font-size: 9px; letter-spacing: .25em;
+  text-transform: uppercase; font-weight: 700;
+  margin-bottom: 12px; display: block;
+}
+.col-do .col-head   { color: var(--sage); }
+.col-dont .col-head { color: var(--rust); }
+.col ul { list-style: none; }
+.col li {
+  font-size: 13.5px; padding: 3px 0 3px 18px;
+  position: relative;
+}
+.col-do li   { color: #1C3E2A; }
+.col-dont li { color: #5C1A0A; }
+.col-do li::before   { content: '✓'; position:absolute; left:0; color: var(--sage); font-weight: 700; }
+.col-dont li::before { content: '✕'; position:absolute; left:0; color: var(--rust); }
+
+/* EXAMPLE */
+.eg {
+  border: 1px solid var(--gold);
+  background: var(--soft);
+  padding: 22px 26px; margin: 24px 0;
+  position: relative;
+}
+.eg-tag {
+  position: absolute; top: -9px; left: 16px;
+  background: var(--soft); padding: 0 8px;
+  font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 700;
+}
+.eg p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 15px;
+  line-height: 1.65; color: var(--ink);
+  margin-bottom: 10px;
+}
+.eg .note {
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-style: normal; font-size: 13px;
+  color: var(--grey); border-top: 1px solid var(--rule);
+  padding-top: 10px; margin: 0;
+}
+
+/* PULL */
+.pull {
+  background: var(--ink);
+  margin: 56px -52px; padding: 60px 72px;
+  text-align: center;
+}
+.pull p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(19px, 3vw, 30px);
+  font-style: italic; line-height: 1.45;
+  color: var(--paper); margin: 0;
+  max-width: 520px; margin: 0 auto;
+}
+.pull strong { color: var(--gold); font-style: normal; }
+
+/* RESOURCES */
+.res-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin: 20px 0;
+}
+.res {
+  border: 1px solid var(--rule);
+  padding: 18px 20px; background: var(--soft);
+  transition: border-color .2s;
+}
+.res:hover { border-color: var(--gold); }
+.res .rname {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--ink); margin-bottom: 3px;
+}
+.res .rdesc { font-size: 13px; color: var(--grey); line-height: 1.5; margin: 0; }
+
+/* SUMMARY */
+.summary {
+  border-top: 2px solid var(--gold);
+  padding-top: 28px; margin-top: 44px;
+}
+.summary .slabel {
+  font-size: 9px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 700; display: block; margin-bottom: 16px;
+}
+.summary li {
+  padding: 10px 0 10px 22px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14.5px; list-style: none;
+  position: relative; color: var(--ink);
+}
+.summary li:last-child { border: none; }
+.summary li::before {
+  content: '✦'; position: absolute; left: 0; top: 13px;
+  color: var(--gold); font-size: 10px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink); padding: 56px 48px;
+  text-align: center; margin-top: 80px;
+}
+footer .ft {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 24px;
+  color: var(--paper); margin-bottom: 10px;
+}
+footer p { font-size: 12.5px; color: var(--grey); max-width: 340px; margin: 0 auto; }
+footer .dots { color: var(--gold); margin: 18px 0 0; display: block; letter-spacing: 8px; }
+
+@media(max-width: 620px) {
+  nav { display: none; }
+  article { padding: 40px 24px 0; }
+  .chbreak { padding: 48px 24px 0; }
+  .pull { margin: 48px -24px; padding: 48px 28px; }
+  .cols, .res-grid { grid-template-columns: 1fr; }
+  .chnum { font-size: 72px; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav>
+  <span class="nav-brand">How to Write a Treatment</span>
+  <ul class="nav-links">
+    <li><a href="#ch1">What & Why</a></li>
+    <li><a href="#ch2">Before You Write</a></li>
+    <li><a href="#ch3">Structure</a></li>
+    <li><a href="#ch4">Writing</a></li>
+    <li><a href="#ch5">Design</a></li>
+    <li><a href="#ch6">Real World</a></li>
+  </ul>
+</nav>
+
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-glow"></div>
+  <p class="eyebrow">A guide for first-time directors</p>
+  <h1>
+    How to Write<br>a Treatment
+    <em>that actually wins</em>
+  </h1>
+  <div class="cover-rule"></div>
+  <p class="cover-sub">จากกระดาษเปล่าสู่เอกสารที่ทำให้ Agency พยักหน้า</p>
+  <div class="cover-chips">
+    <span class="chip">Commercial / TVC</span>
+    <span class="chip">Music Video</span>
+    <span class="chip">Short Film</span>
+  </div>
+  <div class="scroll-cue">scroll</div>
+</section>
+
+
+<!-- CH 1 -->
+<div class="chbreak" id="ch1">
+  <div class="chbreak-inner">
+    <div class="chnum">01</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter One</span>
+      <p class="chtitle">What a Treatment Really Is</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">หลายคนคิดว่า Treatment คือการอธิบายว่าจะทำอะไร แต่มันไม่ใช่แบบนั้น Treatment ที่ดีทำให้คนอ่านรู้สึกถึงงานก่อนที่กล้องจะเริ่มหมุน</p>
+
+  <p>ถ้าบทหนังคือแผนผังสถาปัตย์ที่ระบุทุกประตูทุกห้อง Treatment ก็คือภาพ Render ที่บอกว่าตึกนี้จะรู้สึกยังไงเมื่อยืนอยู่ข้างใน มันไม่ใช่เอกสารเทคนิค แต่คือการขายความคิดผ่านภาษาและภาพ</p>
+
+  <blockquote>
+    <p>"ผมไม่ได้อ่าน Treatment เพื่อรู้ว่าคุณจะทำอะไร ผมอ่านเพื่อรู้ว่าคุณคิดแบบไหน"</p>
+    <cite>Creative Director, Bangkok</cite>
+  </blockquote>
+
+  <h3>Treatment แต่ละประเภทต่างกันยังไง</h3>
+
+  <div class="cols">
+    <div class="col">
+      <span class="col-head" style="color:var(--gold)">Commercial / TVC</span>
+      <ul>
+        <li style="color:#3A3630; padding: 3px 0">เน้น Visual + Brand Message</li>
+        <li style="color:#3A3630; padding: 3px 0">คนอ่าน Agency และ Brand Manager</li>
+        <li style="color:#3A3630; padding: 3px 0">ขาย สไตล์ผู้กำกับ + Brand Fit</li>
+        <li style="color:#3A3630; padding: 3px 0">รูปภาพเยอะ ข้อความกระชับ</li>
+      </ul>
+    </div>
+    <div class="col">
+      <span class="col-head" style="color:var(--gold)">Music Video</span>
+      <ul>
+        <li style="color:#3A3630; padding: 3px 0">เน้น Visual + ตัวตนศิลปิน</li>
+        <li style="color:#3A3630; padding: 3px 0">คนอ่าน ศิลปินและค่ายเพลง</li>
+        <li style="color:#3A3630; padding: 3px 0">ขาย ความเข้าใจเพลงและศิลปิน</li>
+        <li style="color:#3A3630; padding: 3px 0">รูปภาพเยอะ Mood สำคัญมาก</li>
+      </ul>
+    </div>
+    <div class="col">
+      <span class="col-head" style="color:var(--gold)">Short Film</span>
+      <ul>
+        <li style="color:#3A3630; padding: 3px 0">เน้น เรื่องราวและตัวละคร</li>
+        <li style="color:#3A3630; padding: 3px 0">คนอ่าน Producer กองทุน</li>
+        <li style="color:#3A3630; padding: 3px 0">ขาย ความลึกของเรื่อง</li>
+        <li style="color:#3A3630; padding: 3px 0">ข้อความเยอะกว่า รูปน้อยกว่า</li>
+      </ul>
+    </div>
+    <div class="col">
+      <span class="col-head" style="color:var(--gold)">ทุกประเภทต้องมี</span>
+      <ul>
+        <li style="color:#3A3630; padding: 3px 0">Big Idea ที่ชัดเจน</li>
+        <li style="color:#3A3630; padding: 3px 0">ทำให้รู้สึกถึงงานได้</li>
+        <li style="color:#3A3630; padding: 3px 0">แสดง Vision ของผู้กำกับ</li>
+        <li style="color:#3A3630; padding: 3px 0">ทำให้อยากร่วมงานด้วย</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>ทำไมมือใหม่ถึงเขียน Treatment ได้ไม่ดี</h3>
+  <p>ไม่ใช่เพราะไม่มีไอเดีย แต่เพราะทำสิ่งเดิมซ้ำๆ คือเขียนเหมือนรายงาน กลัวที่จะ Specific จนทำทุกอย่างให้กว้างและปลอดภัย และลืมว่ากำลังคุยกับใคร Treatment สำหรับ Agency ต่างจาก Treatment สำหรับค่ายเพลง เพราะคนอ่านต้องการคำตอบคนละชุด</p>
+
+  <div class="callout" data-label="จำไว้">
+    <p>Treatment ที่ดีไม่ได้ตอบว่า "จะทำอะไร" มันตอบว่า "ทำไมงานนี้ต้องรู้สึกแบบนี้"</p>
+  </div>
+</article>
+
+
+<!-- CH 2 -->
+<div class="chbreak" id="ch2">
+  <div class="chbreak-inner">
+    <div class="chnum">02</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter Two</span>
+      <p class="chtitle">Before You Write a Single Word</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">Treatment ที่ชนะไม่ได้เริ่มที่คีย์บอร์ด มันเริ่มก่อนนั้นนานมาก ตอนที่คุณฟัง ตั้งคำถาม และเริ่มเห็นงานในหัว</p>
+
+  <h3>อ่าน Brief สามรอบ</h3>
+  <p>รอบแรกอ่านเพื่อจับว่างานคืออะไร รอบสองอ่านเพื่อถามว่าทำไมงานนี้ถึงต้องมีอยู่ รอบสามอ่านเพื่อหาสิ่งที่ Brief ไม่ได้พูดถึงแต่น่าจะสำคัญ ช่องว่างนั้นคือโอกาสของคุณ</p>
+
+  <h3>Kickoff Call คือสิ่งที่มือใหม่มองข้ามบ่อยที่สุด</h3>
+  <p>การโทรสักนัดหนึ่งที่ถามถูกคำถามให้ข้อมูลมากกว่า Brief สิบหน้า ฟังให้มากกว่าพูด บันทึกเสียงไว้แล้วฟังซ้ำ สิ่งที่ได้ยินรอบสองมักต่างจากรอบแรก</p>
+
+  <div class="cols">
+    <div class="col col-do">
+      <span class="col-head">ถามสิ่งเหล่านี้</span>
+      <ul>
+        <li>งานที่แย่ที่สุดสำหรับ Brief แบบนี้คืออะไร</li>
+        <li>ถ้างานสำเร็จ ลูกค้าจะรู้สึกอย่างไร</li>
+        <li>มีอะไรที่ทำไม่ได้เด็ดขาด</li>
+        <li>ชอบ Treatment แบบ Detailed หรือ Concise</li>
+      </ul>
+    </div>
+    <div class="col col-dont">
+      <span class="col-head">อย่าทำแบบนี้</span>
+      <ul>
+        <li>ถามสิ่งที่ Brief ตอบไว้แล้ว</li>
+        <li>พูดมากกว่าฟัง</li>
+        <li>ขาย Idea ตัวเองระหว่าง Call</li>
+        <li>ลืมจด ไม่บันทึกเสียง</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>รู้ Concept / Big Idea ของตัวเองก่อนเปิด Laptop</h3>
+  <p>Concept / Big Idea คือประโยคเดียวที่บอกว่างานนี้จะทำให้คนดูรู้สึกอะไร ไม่ใช่ว่าจะถ่ายทำอย่างไร ถ้าอธิบายงานในหนึ่งประโยคแล้วคนฟังยังรู้สึกได้ แปลว่าใช้ได้ ถ้าคนฟังงง ยังต้องคิดต่อ</p>
+
+  <div class="eg">
+    <span class="eg-tag">Concept / Big Idea (MV)</span>
+    <p>"MV นี้จะรู้สึกเหมือนกำลังดูความทรงจำของคนอื่น คุ้นเคยแต่ไม่ใช่ของคุณ อบอุ่นแต่เอื้อมไม่ถึง"</p>
+    <p class="note">บอก "ประสบการณ์" ของผู้ชม ไม่ใช่รายการ Shot ที่จะถ่าย</p>
+  </div>
+
+  <div class="eg">
+    <span class="eg-tag">Concept / Big Idea (โฆษณา)</span>
+    <p>"โฆษณาชิ้นนี้จะทำให้คนดูรู้สึกว่าการเริ่มต้นใหม่ไม่ใช่เรื่องน่ากลัว แต่คือสิ่งที่พวกเขารอทำอยู่แล้ว"</p>
+    <p class="note">ไม่พูดถึงกล้องหรือ Shot เลยแม้แต่คำเดียว แต่ทิศทางงานชัดมาก</p>
+  </div>
+</article>
+
+
+<!-- CH 3 -->
+<div class="chbreak" id="ch3">
+  <div class="chbreak-inner">
+    <div class="chnum">03</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter Three</span>
+      <p class="chtitle">Structure That Actually Works</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">ไม่มีสูตรตายตัว แต่มีส่วนที่ต้องมี จะเรียงยังไงและจะให้น้ำหนักส่วนไหนมากกว่า ขึ้นอยู่กับงานแต่ละชิ้น</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="stepn">01.</div>
+      <div class="stepb">
+        <h5>Intro</h5>
+        <p>หน้าแรกที่ต้องสะดุด แสดงว่าเข้าใจโจทย์ บอกว่ามองงานนี้ต่างออกไปยังไง และทำให้คนอ่านอยากพลิกหน้าต่อ</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">02.</div>
+      <div class="stepb">
+        <h5>Concept / Big Idea</h5>
+        <p>หัวใจทั้งหมด ทุกอย่างที่เขียนต่อไปต้องกลับมาหาตรงนี้ ถ้า Concept ไม่ชัด ส่วนอื่นก็ไม่มีทิศทาง</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">03.</div>
+      <div class="stepb">
+        <h5>Storytelling / Narrative</h5>
+        <p>เล่าว่างานจะเดินทางไปยังไง สำหรับโฆษณาคือ Structure ของ 30–60 วินาที สำหรับหนังคือ Arc ของเรื่อง สำหรับ MV คือการเชื่อมภาพเข้ากับ Emotion ของเพลงในแต่ละช่วง</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">04.</div>
+      <div class="stepb">
+        <h5>Mood & Tone</h5>
+        <p>ก่อนจะพูดถึงกล้องหรือสี ต้องรู้ก่อนว่างานนี้จะให้ความรู้สึกแบบไหน อบอุ่นหรือเย็นชา สนุกหรือหนักแน่น เร้าใจหรือสงบ Mood & Tone คือเข็มทิศที่ทำให้ Visual ทุกอย่างไปทิศเดียวกัน</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">05.</div>
+      <div class="stepb">
+        <h5>Visual Language</h5>
+        <p>ส่วนที่ทำให้ได้งานหรือตกรอบ อธิบายสี กล้อง และ Pacing ให้คนอ่านเห็นภาพ ไม่ใช่แค่เข้าใจ ทุก Visual Choice ควรโยงกลับไปหา Mood & Tone ที่กำหนดไว้</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">06.</div>
+      <div class="stepb">
+        <h5>Characters</h5>
+        <p>ไม่ต้องมีประวัติยาว แต่ต้องมีรายละเอียดที่ทำให้รู้สึกว่ารู้จักคนคนนี้อยู่แล้ว</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">07.</div>
+      <div class="stepb">
+        <h5>Sound & Music</h5>
+        <p>เสียงคือครึ่งนึงของประสบการณ์ดู แต่หลายคนลืมเขียนถึงมัน บอกบทบาทของเสียงในงาน ไม่ใช่แค่ชื่อเพลง</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="stepn">08.</div>
+      <div class="stepb">
+        <h5>Post Production</h5>
+        <p>Editing Style, Color Grade, VFX ถ้ามี อธิบายว่างานจะรู้สึกยังไงหลัง Edit ไม่ใช่รายการซอฟต์แวร์ที่ใช้</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>เขียน Intro ยังไงให้ไม่น่าเบื่อ</h3>
+  <p>มือใหม่มักเปิด Intro ด้วยการสรุป Brief กลับ นั่นคือวิธีที่น่าเบื่อที่สุด ลองเปิดด้วยมุมมองที่ต่างออกไป</p>
+
+  <div class="eg">
+    <span class="eg-tag">Intro โฆษณา</span>
+    <p>"ทุกแบรนด์บอกว่าตัวเองเข้าใจลูกค้า แต่น้อยคนที่จะกล้าแสดงให้เห็นว่าลูกค้าเข้าใจตัวเอง นั่นคือจุดที่ผมอยากให้งานชิ้นนี้ยืนอยู่"</p>
+    <p class="note">ไม่สรุป Brief ซ้ำ แต่แสดงมุมมองที่ชัดเจนตั้งแต่ประโยคแรก</p>
+  </div>
+
+  <div class="eg">
+    <span class="eg-tag">Intro MV</span>
+    <p>"ผมฟังเพลงนี้ครั้งแรกบนรถไฟ ภาพแรกที่เห็นในหัวคือแสงไฟข้างทางที่เบลอเป็นเส้น ผมอยากให้คนดูรู้สึกแบบนั้น"</p>
+    <p class="note">เชื่อมประสบการณ์ส่วนตัวกับ Concept ทำให้รู้สึกว่าผู้กำกับเข้าใจเพลงจริงๆ</p>
+  </div>
+
+  <h3>เขียน Character ยังไงให้มีชีวิต</h3>
+
+  <div class="cols">
+    <div class="col col-do">
+      <span class="col-head">เขียนแบบนี้</span>
+      <ul>
+        <li>เธอหัวเราะก่อนที่จะเข้าใจเรื่องตลก</li>
+        <li>เขาจัดของบนโต๊ะทุกครั้งที่เครียด</li>
+        <li>เธอพูดเร็วขึ้นเวลาโกหก</li>
+      </ul>
+    </div>
+    <div class="col col-dont">
+      <span class="col-head">อย่าเขียนแบบนี้</span>
+      <ul>
+        <li>หญิงสาว Gen-Z ที่ Love Life</li>
+        <li>ผู้ชาย 30 ปี มีความฝัน</li>
+        <li>แม่ที่รักครอบครัว</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pull">
+    <p>"ทุกอย่างใน Treatment ต้องตอบได้ว่า <strong>ทำไมงานนี้ต้องรู้สึกแบบนี้</strong> ถ้าตอบไม่ได้ ตัดออกได้เลย"</p>
+  </div>
+</article>
+
+
+<!-- CH 4 -->
+<div class="chbreak" id="ch4">
+  <div class="chbreak-inner">
+    <div class="chnum">04</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter Four</span>
+      <p class="chtitle">Writing That Feels Human</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">Treatment ที่เขียนดีทำให้ไอเดียธรรมดาดูน่าตื่นเต้น Treatment ที่เขียนไม่ดีทำให้ไอเดียที่ยอดเยี่ยมดูน่าเบื่อ</p>
+
+  <h3>เล่า ไม่ใช่รายงาน</h3>
+
+  <div class="cols">
+    <div class="col col-do">
+      <span class="col-head">เล่า</span>
+      <ul>
+        <li>กล้องค่อยๆ ดึงออก จนเห็นว่าเธอยืนอยู่คนเดียวในห้องที่เต็มคน</li>
+        <li>แสงมาจากด้านหลัง เราได้ยินเสียงเขาก่อนที่จะเห็นหน้า</li>
+      </ul>
+    </div>
+    <div class="col col-dont">
+      <span class="col-head">รายงาน</span>
+      <ul>
+        <li>ใช้ Pull-back Shot เพื่อแสดงให้เห็นว่าตัวละครอยู่ในฝูงชน</li>
+        <li>Backlight จะสร้าง Silhouette และเสียงนำภาพในฉากนี้</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>สำหรับ MV ต้องวิเคราะห์เพลงก่อนทุกอย่าง</h3>
+  <p>สิ่งที่ศิลปินต้องการรู้คือคุณเข้าใจเพลงของเขาจริงไหม ไม่ใช่ว่ากล้องจะเคลื่อนยังไง ฟังเพลงซ้ำอย่างน้อยสิบรอบ แต่ละรอบฟังคนละอย่าง รอบแรก Melody รอบสอง Lyric รอบสาม Emotion Arc จับว่าเพลงเปลี่ยนตรงไหน Bridge หรือ Drop ตรงนั้นคือจุดที่ภาพต้องตอบสนอง</p>
+
+  <div class="callout" data-label="ทดสอบก่อน Submit">
+    <p>อ่าน Treatment ออกเสียงดังๆ ถ้ารู้สึกว่าพูดแล้วงง ประโยคนั้นยาวเกิน ถ้าอ่านแล้วมีจังหวะ แปลว่าดีแล้ว</p>
+  </div>
+</article>
+
+
+<!-- CH 5 -->
+<div class="chbreak" id="ch5">
+  <div class="chbreak-inner">
+    <div class="chnum">05</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter Five</span>
+      <p class="chtitle">Designing the Pitch Deck</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">บางคนอ่าน Text ก่อน บางคนดูภาพก่อน Pitch Deck ที่ดีต้องทำงานได้ทั้งสองทาง</p>
+
+  <h3>เขียน Text ให้จบก่อนเสมอ</h3>
+  <p>ความผิดพลาดที่พบบ่อยที่สุดของมือใหม่คือเปิด Keynote หรือ Canva ก่อนแล้วค่อยคิดว่าจะเขียนอะไร ดีไซน์ที่สวยกลบเนื้อหาที่ไม่แข็งแรง เริ่มจาก Google Docs หรือกระดาษเสมอ</p>
+
+  <h3>เรื่อง Visual Reference</h3>
+
+  <div class="callout-dark">
+    <p>ควรหลีกเลี่ยง Stock Photo ไม่ว่าจะเป็น Shutterstock, Getty หรือ Unsplash คนอ่านมักรู้ทัน และมันทำให้ Treatment ดูไม่มีความพยายาม</p>
+    <p style="margin-top: 10px;">Screen Grab จากหนัง MV หรือโฆษณาบอกได้มากกว่า เพราะมันแสดงว่าคุณรู้จักงานที่มีอยู่และรู้ว่าต้องการอะไร</p>
+  </div>
+
+  <h3>หลักการออกแบบสำหรับมือใหม่</h3>
+
+  <ul class="plist">
+    <li data-n="01"><strong>Simple ก่อนเสมอ</strong><span>ดีไซน์ที่ซับซ้อนเกินมักซ่อนว่าเนื้อหาไม่แข็งแรงพอ</span></li>
+    <li data-n="02"><strong>ไม่เกินสามสี</strong><span>เลือกสีที่ Reflect Tone ของงาน ไม่ใช่สีที่ตัวเองชอบ</span></li>
+    <li data-n="03"><strong>Font ที่อ่านง่ายก่อน</strong><span>ถ้าต้องเลือกระหว่างสวยกับอ่านง่าย เลือกอ่านง่ายทุกครั้ง</span></li>
+    <li data-n="04"><strong>Page Number ทุกหน้า</strong><span>Agency อ่าน Treatment หลายชิ้นพร้อมกัน ทำให้ Navigate ง่าย</span></li>
+    <li data-n="05"><strong>GIF ใช้เฉพาะเมื่อจำเป็น</strong><span>แค่ตอนที่ Screenshot ไม่สามารถสื่อ Movement ได้จริงๆ</span></li>
+  </ul>
+
+  <h3>แหล่งหา Visual Reference</h3>
+
+  <div class="res-grid">
+    <div class="res">
+      <div class="rname">Film Grab</div>
+      <div class="rdesc">Screen Grab จากหนังเก่าและใหม่ ฟรี เหมาะสำหรับมือใหม่ที่เพิ่งเริ่ม</div>
+    </div>
+    <div class="res">
+      <div class="rname">Shotdeck</div>
+      <div class="rdesc">ค้นหาด้วย AI ใส่ Keyword ก็เจอภาพที่ต้องการ เหมาะกับ Film Treatment</div>
+    </div>
+    <div class="res">
+      <div class="rname">Frame Set</div>
+      <div class="rdesc">ค้นหาด้วย Color Palette และ Lighting Mood ดีมากสำหรับหา Tone</div>
+    </div>
+    <div class="res">
+      <div class="rname">WDMV</div>
+      <div class="rdesc">ฐานข้อมูล MV Treatment จริงจากผู้กำกับระดับโลก เปิดดูเพื่อเรียนรู้</div>
+    </div>
+    <div class="res">
+      <div class="rname">Pinterest</div>
+      <div class="rdesc">กว้างที่สุด เหมาะสำหรับ Costume, Set Design, Location Mood</div>
+    </div>
+    <div class="res">
+      <div class="rname">Refsee</div>
+      <div class="rdesc">Screen Grab คุณภาพสูงจากโฆษณา MV และหนัง ค้นด้วย AI (Paid)</div>
+    </div>
+  </div>
+</article>
+
+
+<!-- CH 6 -->
+<div class="chbreak" id="ch6">
+  <div class="chbreak-inner">
+    <div class="chnum">06</div>
+    <div class="chinfo">
+      <span class="chlabel">Chapter Six</span>
+      <p class="chtitle">When It's the Real Thing</p>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p class="lead">ทฤษฎีใช้ได้เมื่อมีเวลา แต่งานจริงมาพร้อม Deadline สั้นและความกดดัน นี่คือสิ่งที่ควรรู้</p>
+
+  <h3>เมื่อ Deadline กระชั้น</h3>
+  <p>ถ้าเวลาน้อย ตัดสิ่งที่น้อยคนสนใจออกก่อน แต่อย่าตัด Big Idea กับ Visual Language เพราะสองส่วนนี้คือสิ่งที่คนอ่านจำได้</p>
+
+  <div class="callout" data-label="ลำดับความสำคัญเมื่อเวลาน้อย">
+    <p>Big Idea เป็นอันดับหนึ่ง ถ้าไม่มีนี้ ส่วนอื่นไม่มีความหมาย ต่อมาคือ Visual Language กับ Reference ทำให้เห็นภาพเร็วที่สุด แล้วจึงค่อยเป็น Intro ที่ต้องดึงดูด สุดท้ายคือ Story Outline ส่วนที่ตัดได้เมื่อเวลาไม่พอคือ Post Production Details และ Technical Spec</p>
+  </div>
+
+  <h3>เมื่อไม่ได้งาน</h3>
+  <p>ทุก Treatment ที่ไม่ผ่านสอนอะไรบางอย่างเสมอ ลองถามตัวเองว่า Big Idea ชัดพอไหม Visual ทำให้เห็นภาพได้ทันทีไหม และตอบโจทย์ที่ลูกค้าต้องการจริงๆ หรือเปล่า</p>
+
+  <h3>สร้าง Style ของตัวเองให้ชัด</h3>
+  <p>สิ่งที่ทำให้ผู้กำกับได้รับการเรียกซ้ำไม่ใช่ Treatment ที่ดี แต่คือ Style ที่จดจำได้ Agency ต้องบอกได้ว่าถ้าต้องการงานแบบนี้ต้องโทรหาใคร มือใหม่หลายคนพยายามทำได้ทุกแบบ ผลลัพธ์ที่ได้คือไม่มีใครจำได้ว่าเก่งเรื่องอะไร</p>
+
+  <div class="summary">
+    <span class="slabel">What to Remember</span>
+    <ul>
+      <li>Treatment ที่ดีทำให้รู้สึกถึงงาน ก่อนที่กล้องจะหมุน</li>
+      <li>เริ่มจาก Big Idea เสมอ ถ้าไม่ชัด ทุกอย่างที่เขียนต่อไปไม่มีทิศทาง</li>
+      <li>ฟังให้มากกว่าพูดใน Kickoff Call ข้อมูลที่ได้มาทำ Treatment ต่างจากคู่แข่ง</li>
+      <li>เขียนเหมือนเล่า ไม่ใช่รายงาน จังหวะภาษาสำคัญพอๆ กับเนื้อหา</li>
+      <li>ห้ามใช้ Stock Photo ใช้ Screen Grab จากงานจริงแทน</li>
+      <li>เขียน Text ให้จบก่อน แล้วค่อยทำ Design</li>
+    </ul>
+  </div>
+
+  <div class="pull">
+    <p>"ทุก Treatment คือโอกาสเรียนรู้ <strong>ไม่ว่าจะได้งานหรือไม่</strong>"</p>
+  </div>
+</article>
+
+
+<footer>
+  <p class="ft">How to Write a Treatment</p>
+  <p>A guide for first-time directors · Commercial · MV · Short Film</p>
+  <span class="dots">· · ·</span>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('bar').style.width =
+    (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+const io = new IntersectionObserver(
+  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.06 }
+);
+document.querySelectorAll('article').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
