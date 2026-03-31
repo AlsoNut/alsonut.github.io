@@ -77,3 +77,62 @@
                 </form>
             </div>
             <p class="copyright">© 2026 Alsonut - Chayaphat Phugate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Part 1: Brainfood Logic ---
+        const container = document.getElementById('brainfood');
+        const tags = document.querySelectorAll('.tag');
+        let allData = [];
+
+        function displayCards(data) {
+            let html = '';
+            data.forEach(item => {
+                html += `
+                <div class="card">
+                    <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="thumbnail" style="background-image: url('${item.thumb}');"></div>
+                        <div class="card-body">
+                            <span class="category">${item.category}</span>
+                            <h3>${item.title}</h3>
+                            <p class="desc-en">${item.desc_en}</p>
+                            <p class="desc-th">${item.desc_th}</p>
+                        </div>
+                    </a>
+                </div>`;
+            });
+            container.innerHTML = html || '<p>No items found.</p>';
+        }
+
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                allData = data;
+                displayCards(allData);
+            });
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                const filter = tag.getAttribute('data-filter');
+                displayCards(filter === 'All' ? allData : allData.filter(i => i.category === filter));
+            });
+        });
+
+        // --- Part 2: Blog Logic ---
+        fetch('blogs.json')
+            .then(res => res.json())
+            .then(data => {
+                const blogList = document.getElementById('blog-list');
+                blogList.innerHTML = data.map(post => `
+                    <article class="blog-item">
+                        <div class="blog-date">${post.date}</div>
+                        <h3><a href="${post.url}">${post.title}</a></h3>
+                    </article>
+                `).join('');
+            });
+    </script>
+</body>
+</html>
