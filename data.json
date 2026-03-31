@@ -1,0 +1,18 @@
+[
+  {
+    "category": "AI Tools",
+    "title": "Visual Scripting Helper",
+    "desc_en": "A powerful tool for generating visual metaphors in your scripts.",
+    "desc_th": "เครื่องมือช่วยสร้างภาพเปรียบเทียบในบทหนังให้น่าสนใจยิ่งขึ้น",
+    "thumb": "assets/images/visual-script.jpg",
+    "link": "https://example.com"
+  },
+  {
+    "category": "Cool Site",
+    "title": "ShotDeck",
+    "desc_en": "High-definition movie frames for reference.",
+    "desc_th": "คลังภาพจากหนังเพื่อใช้เป็นเรฟเฟอเรนซ์",
+    "thumb": "assets/images/shotdeck.jpg",
+    "link": "https://shotdeck.com"
+  }
+]
