@@ -27,6 +27,7 @@
         <div class="container">
             <p class="eyebrow">FOR FILMMAKERS & STORYTELLERS</p>
             <h1>YOUR CREATIVE BRAIN’S FRIEND</h1>
+            <p class="hero-sub">A curated resource to fuel your storytelling and filmmaking journey.</p>
         </div>
     </section>
 
@@ -49,3 +50,96 @@
 
     <section id="brainfood" class="content-grid container">
         </section>
+
+    <hr class="section-divider">
+
+    <section id="blogs" class="container">
+        <h2 class="section-title">✍️ Latest Updates</h2>
+        <div id="blog-list" class="blog-list">
+            </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="about-card">
+            <h2 class="section-title">👤 About</h2>
+            <p><strong>Alsonut</strong> is a dedicated platform for filmmakers and storytellers to discover insights, tools, and inspirations that bridge the gap between imagination and execution.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div id="newsletter" class="newsletter-box">
+                <h2>📩 Join the Newsletter</h2>
+                <p>Stay updated with the latest filmmaking tools and storytelling insights.</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <p class="copyright">© 2026 Alsonut. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Brainfood Logic (Data fetching & Filtering)
+        const container = document.getElementById('brainfood');
+        const tags = document.querySelectorAll('.tag');
+        let allItems = [];
+
+        function renderCards(data) {
+            container.innerHTML = data.map(item => `
+                <div class="card">
+                    <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="thumbnail" style="background-image: url('${item.thumb}');"></div>
+                        <div class="card-body">
+                            <span class="category">${item.category}</span>
+                            <h3>${item.title}</h3>
+                            <p class="desc-en">${item.desc_en}</p>
+                            <p class="desc-th">${item.desc_th}</p>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                allItems = data;
+                renderCards(allItems);
+            })
+            .catch(err => console.error("Could not load data.json", err));
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                const filter = tag.getAttribute('data-filter');
+                const filteredData = filter === 'All' ? allItems : allItems.filter(i => i.category === filter);
+                renderCards(filteredData);
+            });
+        });
+
+        // 2. Blog Logic
+        fetch('blogs.json')
+            .then(res => res.json())
+            .then(data => {
+                const blogList = document.getElementById('blog-list');
+                blogList.innerHTML = data.map(post => `
+                    <article class="blog-item">
+                        <div class="blog-date">${post.date}</div>
+                        <h3><a href="${post.url}">${post.title}</a></h3>
+                    </article>
+                `).join('');
+            });
+
+        // 3. Progress Bar Logic
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
