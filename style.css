@@ -1,0 +1,72 @@
+:root {
+    --primary-grey: #2d2d2d;
+    --light-grey: #f8f8f8;
+    --accent-yellow: #ffcc00;
+    --text-dark: #1a1a1a;
+    --text-muted: #666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Inter', 'Kanit', sans-serif; 
+    background-color: #fff; 
+    color: var(--text-dark); 
+    line-height: 1.6; 
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+header { background: var(--primary-grey); padding: 1.2rem 0; position: sticky; top: 0; z-index: 1000; }
+nav { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; color: var(--accent-yellow); }
+.nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
+.nav-links a:hover { color: var(--accent-yellow); }
+.btn-yellow { background: var(--accent-yellow); color: var(--primary-grey) !important; padding: 10px 20px; border-radius: 4px; }
+
+/* Hero */
+.hero { background: var(--light-grey); padding: 100px 0; text-align: center; border-bottom: 5px solid var(--accent-yellow); }
+.hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -1px; }
+.hero p { color: var(--text-muted); font-size: 1.1rem; }
+
+/* Tags */
+.filter-section { padding: 40px 0 20px; }
+.tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.tag { padding: 10px 24px; border: 1.5px solid #eee; background: #fff; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+.tag:hover, .tag.active { background: var(--primary-grey); color: #fff; border-color: var(--primary-grey); }
+
+/* Grid */
+.content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; padding: 40px 0 80px; }
+.card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #f0f0f0; transition: 0.3s; }
+.card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+.thumbnail { height: 200px; background-size: cover; background-position: center; background-color: #eee; }
+.card-body { padding: 24px; }
+.category { font-size: 0.7rem; font-weight: 700; color: var(--accent-yellow); background: var(--primary-grey); padding: 4px 8px; border-radius: 3px; }
+.card-body h3 { margin: 15px 0 10px; font-size: 1.25rem; font-weight: 700; }
+.desc-en { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 8px; }
+.desc-th { font-size: 0.85rem; color: var(--text-muted); font-family: 'Kanit', sans-serif; }
+
+/* Blogs */
+.section-title { font-size: 2rem; margin-bottom: 40px; }
+.blog-item { padding: 20px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+.blog-date { font-size: 0.85rem; color: #999; min-width: 120px; }
+.blog-item h3 a { text-decoration: none; color: var(--text-dark); transition: 0.2s; }
+.blog-item h3 a:hover { color: var(--accent-yellow); padding-left: 5px; }
+
+.section-divider { border: 0; height: 1px; background: #eee; margin: 60px 0; }
+
+/* Footer */
+footer { background: var(--primary-grey); color: #fff; padding: 80px 0 40px; }
+.newsletter-box { text-align: center; margin-bottom: 60px; }
+.newsletter-box h2 { font-size: 2rem; margin-bottom: 10px; }
+.subscribe-form { display: flex; gap: 0; max-width: 500px; margin: 30px auto 0; }
+.subscribe-form input { flex: 1; padding: 15px 20px; border: none; border-radius: 4px 0 0 4px; font-size: 1rem; }
+.subscribe-form button { background: var(--accent-yellow); padding: 15px 30px; border: none; font-weight: 700; border-radius: 0 4px 4px 0; cursor: pointer; }
+.copyright { text-align: center; color: #555; font-size: 0.8rem; margin-top: 40px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2.2rem; }
+    .blog-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
