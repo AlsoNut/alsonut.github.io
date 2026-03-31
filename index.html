@@ -41,28 +41,36 @@
         </div>
     </section>
 
-    <section id="brainfood" class="content-grid container">
-        <div class="card">
-            <div class="thumbnail" style="background-image: url('assets/images/sample-tool.jpg');"></div>
-            <div class="card-body">
-                <span class="category">AI Tools</span>
-                <h3>Visual Scripting Helper</h3>
-                <p class="desc-en">A powerful tool for generating visual metaphors in your scripts.</p>
-                <p class="desc-th">เครื่องมือช่วยสร้างภาพเปรียบเทียบในบทหนังให้น่าสนใจยิ่งขึ้น</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="thumbnail" style="background-image: url('assets/images/sample-site.jpg');"></div>
-            <div class="card-body">
-                <span class="category">Cool Site</span>
-                <h3>ShotDeck</h3>
-                <p class="desc-en">The ultimate library of high-definition movie frames for visual reference.</p>
-                <p class="desc-th">ห้องสมุดรวมภาพจากภาพยนตร์ความละเอียดสูง เพื่อใช้เป็นตัวอย่างงานภาพและการจัดแสง</p>
-            </div>
-        </div>
+   <section id="brainfood" class="content-grid container">
     </section>
 
+<script>
+    // ดึงข้อมูลจากไฟล์ data.json
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('brainfood');
+            let html = '';
+            
+            data.forEach(item => {
+                html += `
+                <div class="card" data-category="${item.category}">
+                    <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="thumbnail" style="background-image: url('${item.thumb}');"></div>
+                        <div class="card-body">
+                            <span class="category">${item.category}</span>
+                            <h3>${item.title}</h3>
+                            <p class="desc-en">${item.desc_en}</p>
+                            <p class="desc-th">${item.desc_th}</p>
+                        </div>
+                    </a>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        });
+</script>
     <hr class="section-divider">
 
     <section id="blogs" class="container">
