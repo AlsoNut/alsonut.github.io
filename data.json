@@ -14,5 +14,29 @@
     "desc_th": "ห้องสมุดภาพจากหนังที่ใหญ่ที่สุดในโลก",
     "thumb": "https://images.unsplash.com/photo-1485846234645-a62644f84728",
     "link": "https://shotdeck.com"
+  },
+  {
+    "category": "AI Tools",
+    "title": "ChatGPT for Scripts",
+    "desc_en": "Advanced prompting for scene structure.",
+    "desc_th": "เทคนิคการเขียน Prompt เพื่อวางโครงสร้างฉาก",
+    "thumb": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "link": "#"
+  },
+  {
+    "category": "Ref.",
+    "title": "Film Grab",
+    "desc_en": "High-quality movie stills database.",
+    "desc_th": "คลังภาพนิ่งจากภาพยนตร์คุณภาพสูง",
+    "thumb": "https://images.unsplash.com/photo-1485846234645-a62644f84728",
+    "link": "#"
+  },
+  {
+    "category": "Design",
+    "title": "Adobe Color",
+    "desc_en": "Palette generator for cinematography.",
+    "desc_th": "เครื่องมือสร้างพาเลทสีสำหรับงานภาพ",
+    "thumb": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853",
+    "link": "#"
   }
 ]
