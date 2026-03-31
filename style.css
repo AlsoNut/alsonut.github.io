@@ -1,79 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alsonut | Filmmaking & Storytelling Resources</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root {
+    --primary-grey: #2d2d2d;
+    --bg-light-grey: #f0f2f5;
+    --accent-yellow: #ffcc00;
+    --text-dark: #1a1a1a;
+    --text-muted: #666;
+    --white: #ffffff;
+}
 
-    <header>
-        <nav class="container">
-            <div class="logo">ALSONUT</div>
-            <ul class="nav-links">
-                <li><a href="#brainfood-header">Brainfood</a></li>
-                <li><a href="#blogs">Blogs</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#newsletter" class="btn-yellow">Join Newsletter</a></li>
-            </ul>
-        </nav>
-    </header>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    background-color: var(--bg-light-grey); 
+    font-family: 'Inter', 'Kanit', sans-serif; 
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-    <section class="hero">
-        <div class="container">
-            <h1>🚀 Elevate Your Storytelling</h1>
-            <p>A curated resource for filmmakers, creators, and storytellers.</p>
-        </div>
-    </section>
+/* Navigation */
+header { background: var(--primary-grey); padding: 1.2rem 0; position: sticky; top: 0; z-index: 1000; }
+nav { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.4rem; font-weight: 700; color: var(--accent-yellow); letter-spacing: 2px; }
+.nav-links { display: flex; list-style: none; gap: 25px; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+.btn-yellow { background: var(--accent-yellow); color: var(--primary-grey) !important; padding: 10px 20px; border-radius: 4px; }
 
-    <section class="filter-section">
-        <div class="container">
-            <div class="tags" id="tag-container">
-                <button class="tag active" data-filter="All">All</button>
-                <button class="tag" data-filter="Ref.">Ref.</button>
-                <button class="tag" data-filter="Cool Site">Cool Site</button>
-                <button class="tag" data-filter="Portfolio">Portfolio</button>
-                <button class="tag" data-filter="Design">Design</button>
-                <button class="tag" data-filter="AI Tools">AI Tools</button>
-            </div>
-        </div>
-    </section>
+/* Hero */
+.hero { background: var(--primary-grey); color: #fff; padding: 100px 0; text-align: center; border-bottom: 5px solid var(--accent-yellow); }
+.hero h1 { font-size: 3rem; margin-bottom: 15px; }
+.hero p { color: #ccc; font-size: 1.1rem; }
 
-    <section id="brainfood-header" class="container" style="padding-top: 40px;">
-        <h2 class="section-title">🧠 Brainfood Sourcing</h2>
-    </section>
+/* Filters */
+.filter-section { padding: 30px 0; background: var(--bg-light-grey); position: sticky; top: 68px; z-index: 99; }
+.tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.tag { padding: 10px 24px; border: 1.5px solid #ddd; background: #fff; border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+.tag.active, .tag:hover { background: var(--primary-grey); color: #fff; border-color: var(--primary-grey); }
 
-    <section id="brainfood" class="content-grid container">
-        </section>
+/* Content Grid */
+.content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding: 40px 0; }
+.card { background: var(--white); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+.thumbnail { height: 200px; background-size: cover; background-position: center; background-color: #eee; }
+.card-body { padding: 24px; }
+.category { font-size: 0.7rem; font-weight: 700; color: var(--accent-yellow); background: var(--primary-grey); padding: 4px 8px; border-radius: 3px; }
+.card-body h3 { margin: 15px 0 10px; font-size: 1.25rem; }
+.desc-en { font-size: 0.95rem; margin-bottom: 5px; }
+.desc-th { font-size: 0.85rem; color: var(--text-muted); }
 
-    <hr class="section-divider">
+/* Blogs & About */
+.section-title { font-size: 2rem; font-weight: 700; margin-bottom: 30px; }
+.blog-item { padding: 20px 0; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+.blog-item a { text-decoration: none; color: inherit; font-weight: 600; }
+.blog-item a:hover { color: var(--accent-yellow); }
+.section-divider { border: 0; height: 1px; background: #ddd; margin: 60px 0; }
+.about-section { padding: 60px 0; }
 
-    <section id="blogs" class="container">
-        <h2 class="section-title">✍️ Latest Updates</h2>
-        <div id="blog-list" class="blog-list">
-            </div>
-    </section>
-
-    <section id="about" class="container about-section">
-        <div class="about-flex">
-            <div class="about-text">
-                <h2 class="section-title">👤 About</h2>
-                <p>Filmmaker with 9+ years in film and commercial production. Creator of <strong>Alsonut</strong>.</p>
-                <p>พื้นที่รวบรวมวัตถุดิบทางความคิด เพื่อให้นักเล่าเรื่องทำงานได้คมและลึกขึ้น</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div id="newsletter" class="newsletter-box">
-                <h2>📩 Join the Newsletter</h2>
-                <p>Get filmmaking tips and content insights delivered to your inbox.</p>
-                <form class="subscribe-form">
-                    <input type="email" placeholder="Your Email Address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-            <p class="copyright">© 2026 Alsonut - Chayaphat Phugate. All rights reserved.</p>
+/* Footer */
+footer { background: var(--primary-grey); color: #fff; padding: 80px 0 40px; margin-top: 80px; }
+.newsletter-box { text-align: center; max-width: 600px; margin: 0 auto 60px; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; }
+.subscribe-form { display: flex; margin-top: 25px; }
+.subscribe-form input { flex: 1; padding: 15px; border-radius: 4px 0 0 4px; border: none; }
+.subscribe-form button { background: var(--accent-yellow); border: none; padding: 0 30px; font-weight: 700; border-radius: 0 4px 4px 0; cursor: pointer; }
+.copyright { text-align: center; color: #666; font-size: 0.85rem; }
